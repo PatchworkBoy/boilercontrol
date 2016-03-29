@@ -1,25 +1,23 @@
 #include "boilercontrol.h"
-
 #include "TransmitPin.h"
-
 #include <stdio.h>
 
-static const unsigned int nLongPulseLength = 953;
-static const unsigned int nShortPulseLength = 365;
-static const unsigned int nPauseLength = 365;
-static const unsigned int nTxDelayLength = 4530;
-static const unsigned int nPreTxDelay = 27810;
+static const unsigned int nLongPulseLength = 868;
+static const unsigned int nShortPulseLength = 250;
+static const unsigned int nPauseLength = 250;
+static const unsigned int nTxDelayLength = 3795;
+static const unsigned int nPreTxDelay = 34120;
 static const unsigned int nPostTxDelay = nPreTxDelay;
 
 static const int ON_PACKETS[][nBitsPerPacket] = {
-    {1,0,0,0,0,1,0,0,0,1,0,1,1,1,1,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1},
-    {1,1,1,1,1,0,1,1,1,0,1,0,0,0,0,1,0,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0}
+    {1,0,0,0,1,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1},
+    {1,1,1,1,0,0,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0}
 };
 static const int OFF_PACKETS[][nBitsPerPacket] = {
-    {1,0,0,0,0,1,0,0,0,1,0,1,1,1,1,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0},
-    {1,1,1,1,1,0,1,1,1,0,1,0,0,0,0,1,0,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1}
+    {1,0,0,0,1,1,0,0,0,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0},
+    {1,1,1,1,0,0,1,1,1,0,0,1,1,0,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1}
 };
-static const int DELAY[] = {27810, 18069, 17512, 4721, 22327, 18916, 25870, nPostTxDelay};
+static const int DELAY[] = {26810, 18069, 19512, 14721, 22327, 18916, 25870, nPostTxDelay};
 
 BoilerControl::BoilerControl(TransmitPin *transmitPin) {
     this->transmitPin = transmitPin;
